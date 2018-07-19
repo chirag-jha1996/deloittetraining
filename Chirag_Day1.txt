@@ -1,0 +1,56 @@
+Assignment 1:
+create table SID
+  2  (
+  3  sid char(5),
+  4  sname varchar(20),
+  5  dob date,
+  6  doj date
+  7  );
+
+ Insert into SID values ('3','Tufail',to_date('2003/05/03','yyyy/mm/dd'),to_date('2003/06/02','yyyy/mm/dd'));
+
+SID   SNAME                DOB       DOJ
+----- -------------------- --------- ---------
+1     A                    01-AUG-18 02-APR-18
+2     B                    20-DEC-95 02-APR-18
+2     B                    20-MAR-94 02-APR-19
+3     Tufail               03-MAY-03 02-JUN-03
+
+
+SQL> select floor(months_between(SYSDATE,DOB)/12) from SID;
+
+FLOOR(MONTHS_BETWEEN(SYSDATE,DOB)/12)
+-------------------------------------
+                                   -1
+                                   22
+                                   24
+                                   15
+
+SQL> select NVL (to_char(marks),'ab') from student_t;
+
+NVL(TO_CHAR(MARKS),'AB')
+----------------------------------------
+ab
+ab
+98
+
+SQL> select * from student_t;
+
+ROLL       NAME                 ADDRESS                   MARKS
+---------- -------------------- -------------------- ----------
+1          Tufail               Chennai
+2          Amit                 Chennai
+3          Tarun                Chennai                      98
+
+
+SQL> Select NVL2(marks,roll*3,roll*5) from student_t;
+
+NVL2(MARKS,ROLL*3,ROLL*5)
+-------------------------
+                        5
+                       10
+                        9
+
+
+
+

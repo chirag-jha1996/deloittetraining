@@ -1,0 +1,102 @@
+Create a table called Employee with the following Columns  and perform the following operations:-
+------------------------------------------------------------------------------------------------------------
+
+EmployeeID    
+EmployeeName   
+EmployeeAddress : 
+DOB
+DOJ
+Salary
+
+
+a.) Insert five records
+
+b) Retrieve all the records
+
+
+c) Retrieve the Employee name whose salary is greater than 20000
+
+d) Retrieve the Employee name whose address contains 'a' or 'p' or 'r'  as the last character
+ 
+e) Increase the Salary of all the Employee by 20%
+
+f) Delete all the employee records whose salary is less than 5000
+
+SQL> create table employee
+  2  (
+  3  EmployeeID char(6),
+  4  EmployeeName varchar(10),
+  5  EmployeeAddress varchar(10),
+  6  DOB Date,
+  7  DOJ Date,
+  8  Salary number(10)
+  9  );
+
+
+
+SQL> insert into employee values ('1', 'A', 'Chennai','28-August-1990', '12-January-2017', '10000');
+
+1 row created.
+
+SQL> insert into employee values ('2', 'B', 'Chennai','21-August-1967', '31-January-2006', '50000');
+
+1 row created.
+
+SQL> insert into employee values ('3', 'C', 'Bengaluru','21-November-1977', '02-May-2016', '70000');
+
+1 row created.
+
+SQL> insert into employee values ('4', 'D', 'Allahabad','15-June-2000', '22-July-2018', '5000');
+
+1 row created.
+
+
+
+SQL> insert into employee values ('5', 'E', 'Nagpur','28-February-1984', '24-July-2014', '16000');
+
+1 row created.
+
+SQL> Select*From employee;
+
+EMPLOY EMPLOYEENA EMPLOYEEAD DOB       DOJ           SALARY
+------ ---------- ---------- --------- --------- ----------
+1      A          Chennai    28-AUG-90 12-JAN-17      10000
+2      B          Chennai    21-AUG-67 31-JAN-06      50000
+3      C          Bengaluru  21-NOV-77 02-MAY-16      70000
+4      D          Allahabad  15-JUN-00 22-JUL-18       5000
+5      E          Nagpur     28-FEB-84 24-JUL-14      16000
+
+
+SQL> Select*From employee;
+
+EMPLOY EMPLOYEENA EMPLOYEEAD DOB       DOJ           SALARY
+------ ---------- ---------- --------- --------- ----------
+1      A          Chennai    28-AUG-90 12-JAN-17      10000
+2      B          Chennai    21-AUG-67 31-JAN-06      50000
+3      C          Bengaluru  21-NOV-77 02-MAY-16      70000
+4      D          Allahabad  15-JUN-00 22-JUL-18       5000
+5      E          Nagpur     28-FEB-84 24-JUL-14      16000
+
+SQL> select employeename from employee
+  2  where salary>20000;
+
+EMPLOYEENA
+----------
+B
+C
+
+SQL> Select employeename, employeeaddress from employee
+  2  where employeeaddress like '%a' OR employeeaddress like '%p' OR employeeaddress like '%r';
+
+EMPLOYEENA EMPLOYEEAD
+---------- ----------
+E          Nagpur
+
+
+
+
+
+
+
+
+

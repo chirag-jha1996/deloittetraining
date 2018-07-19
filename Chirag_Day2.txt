@@ -1,0 +1,286 @@
+SQL>  create table emp_A
+  2  (
+  3  emp_no numeric(3) primary key,
+  4  empname varchar2(20) not null,
+  5  salary numeric (8,2),
+  6  designation varchar2(20),
+  7  dept_no numeric(3)
+  8  );
+
+Table created.
+
+SQL> create table dept_A
+  2  (
+  3  dept_no numeric(3) primary key,
+  4  dept_name varchar2(20),
+  5  location varchar2(20) not null
+  6  );
+
+
+alter table emp_A add constraint myfk_1 foreign key(dept_no) references dept_A (dept_no);
+
+SQL> select*from emp_A
+  2  ;
+
+    EMP_NO EMPNAME                  SALARY DESIGNATION             DEPT_NO
+---------- -------------------- ---------- -------------------- ----------
+         1 Anu                       98000 Consultant                    1
+
+SQL> select * from dept_A
+  2  ;
+
+   DEPT_NO DEPT_NAME            LOCATION
+---------- -------------------- --------------------
+         1 Anu                  Bangalore
+
+
+
+SQL> create table supplier
+  2  (
+  3  supplier_id numeric(10) not null,
+  4  supplier_name varchar2(50) not null,
+  5  contact_name varchar2(50),
+  6  Constraint supplier_pk PRIMARY KEY (supplier_id)
+  7  );
+
+
+
+SQL> create table products(
+  2  product_id numeric(10) not null,
+  3  supplier_id numeric(10) not null,
+  4  CONSTRAINT fk_supplier
+  5  FOREIGN KEY (supplier_id)
+  6  REFERENCES supplier(supplier_id)
+  7  );
+
+
+SQL> ALTER TABLE STUDENT_T ADD EMAIL VARCHAR2(20);
+
+Table altered.
+
+SQL> SELECT * FROM STUDENT_T;
+
+ROLL       NAME                 ADDRESS                   MARKS
+---------- -------------------- -------------------- ----------
+EMAIL
+--------------------
+1          Tufail               Chennai
+
+
+2          Amit                 Chennai
+
+
+3          Tarun                Chennai                      98
+
+
+
+SQL> ALTER TABLE STUDENT_T DROP COLUMN EMAIL;
+
+Table altered.
+
+SQL> SELECT*FROM STUDENT_T;
+
+ROLL       NAME                 ADDRESS                   MARKS
+---------- -------------------- -------------------- ----------
+1          Tufail               Chennai
+2          Amit                 Chennai
+3          Tarun                Chennai                      98
+
+
+SQL> ALTER TABLE STUDENT_T ADD EMAIL VARCHAR2(20);
+
+Table altered.
+
+SQL> alter table student_t add constraint emailConstraint check (email in ('A','B','C'));
+
+Table altered.
+
+SQL> alter table student_t drop constraint emailConstraint;
+
+Table altered.
+
+
+
+SQL> create table section_t
+  2  (
+  3  section_id number(3) constraint S_ID check (section_ID>0),
+  4  section_name char(30) constraint s_name not null,
+  5  book_count number(6),
+  6  constraint sect_prime PRIMARY KEY (Section_ID))
+  7  ;
+
+Table created.
+
+SQL> create table book_t
+  2  (
+  3  isbn number(10) constraint b_isbn check (ISBN BETWEEN 1 and 2000),
+  4  title varchar2(200) constraint B_title not null,
+  5  author varchar2(50) constraint b_auth not null,
+  6  lent_date date,
+  7  returned_date date,
+  8  times_lent number(6),
+  9  section_ID number(3),
+ 10  constraint book_prime primary key (ISBN),
+ 11  constraint book_sect foreign key (section_ID) references section_t (section_ID)
+ 12  ON DELETE CASCADE
+ 13  );
+
+Table created.
+
+SQL> INSERT INTO SECTION_T values(1,'ABC',78);
+
+1 row created.
+
+SQL> INSERT INTO SECTION_T values(2,'XYZ',65);
+
+1 row created.
+
+SQL> insert into book_t values(1,'java','james',to_date('3/3/09', 'mm/dd/yy'), to_date('3/4/09','mm/dd/yy'),10,1);
+
+1 row created.
+
+SQL> select*from section_t;
+
+SECTION_ID SECTION_NAME                   BOOK_COUNT
+---------- ------------------------------ ----------
+         1 ABC                                    78
+         2 XYZ                                    65
+
+SQL> select*from book_t;
+
+      ISBN
+----------
+TITLE
+--------------------------------------------------------------------------------
+AUTHOR                                             LENT_DATE RETURNED_
+-------------------------------------------------- --------- ---------
+TIMES_LENT SECTION_ID
+---------- ----------
+         1
+java
+james                                              03-MAR-09 04-MAR-09
+        10          1
+
+
+SQL> create table Stu_D
+  2  (
+  3  Roll number(20),
+  4  Name varchar(20)
+  5  );
+
+Table created.
+
+SQL> create table Fees_D
+  2  (
+  3  Roll number(20),
+  4  Amount number(10)
+  5  );
+
+Table created.
+
+SQL> insert into Stu_d values(&Roll, '&Name');
+Enter value for roll: 12
+Enter value for name: Ahmed
+old   1: insert into Stu_d values(&Roll, '&Name')
+new   1: insert into Stu_d values(12, 'Ahmed')
+
+1 row created.
+
+SQL> insert into Stu_D values(&Roll,'&Name');
+Enter value for roll: 13
+Enter value for name: Russia
+old   1: insert into Stu_D values(&Roll,'&Name')
+new   1: insert into Stu_D values(13,'Russia')
+
+1 row created.
+
+SQL> select * from stu_d;
+
+      ROLL NAME
+---------- --------------------
+        12 Ahmed
+        13 Russia
+
+SQL> insert into Fees_D values(12,9000);
+
+1 row created.
+
+SQL> insert into Fees_D values(13,9000);
+
+1 row created.
+
+
+SQL> select name from stu_d where roll in (select roll from fees_d where amount =9000);
+
+NAME
+--------------------
+Ahmed
+Russia
+
+
+
+SQL> select * from fees_d;
+
+      ROLL     AMOUNT
+---------- ----------
+        12       9000
+        13       9000
+
+
+
+SQL> create table Suppliers
+  2  (
+  3     supplier_id varchar(20),
+  4     supplier_name varchar(20)
+  5  );
+
+Table created.
+
+SQL> create table Orders
+  2  (
+  3    order_id varchar(20),
+  4     supplier_id varchar(20),
+  5     order_date date
+  6  );
+
+Table created.
+
+SQL> insert into Suppliers values('10000','IBM');
+
+1 row created.
+
+SQL>
+SQL> insert into Suppliers values('10001','Hewlett Packard')
+  2  ;
+
+1 row created.
+
+SQL> insert into Suppliers values('10002','Microsoft');
+
+1 row created.
+
+SQL> insert into Suppliers values('10003','TCS');
+
+1 row created.
+
+SQL> insert into Orders values('1','10000',to_date('3/3/09','mm/dd/yy'));
+
+1 row created.
+
+SQL> insert into Orders values('2','10000',to_date('7/5/10','mm/dd/yy'));
+
+1 row created.
+
+SQL> insert into Orders values('3','10001',to_date('12/8/10','mm/dd/yy'));
+
+1 row created.
+
+
+SQL> select s.supplier_id, supplier_name,order_id from orders o,suppliers s where s.supplier_id=o.supplier_id;
+
+SUPPLIER_ID          SUPPLIER_NAME        ORDER_ID
+-------------------- -------------------- --------------------
+10000                IBM                  2
+10000                IBM                  1
+10001                Hewlett Packard      3
+
