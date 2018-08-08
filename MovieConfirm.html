@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Booking</title>
+<script type="text/javascript">
+function calculatePrice(){
+	var x = parseInt(document.getElementbyId("num_Of_Seats").value);
+	var y = x*250;
+	document.getElementbyId("p").innerHTML=x;
+	
+}
+</script>
+</head>
+<body >
+<div style="background-color:black;color:yellow;padding:20px;text-align:center; font-size:300%;">
+<h1 >MovieScoop</h1>
+</div>
+
+
+
+<form name="confirm" onClick=>
+<div style="padding:20px;text-align:center;font-size:200%;">
+Date<input type = "date" name="date" required><br><br>
+</div>
+<div style="text-align:center;font-size:200%;">
+Number of Seats<input type = "text" name = "NumberOfSeats" id="num_Of_Seats" required><br><br>
+</div>
+<div style="text-align:center;font-size:200%;">
+
+Location<select name = "Location" required>
+
+<option value="Bangalore">Bangalore</option>
+<option value="Mumbai">Mumbai</option>
+<option value="Delhi">Delhi</option>
+<option value="Kolkata">Kolkata</option>
+</select></div><br><br>
+<div style="text-align:center;">
+Price<input type="text" name= "price" id="p"></div><br><br>
+<input type = "submit" value="Submit">
+
+
+</form>
+</body>
+</html>
